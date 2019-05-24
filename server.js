@@ -53,7 +53,17 @@ app.post('/api/shorturl/new', async (req, res, next) => {
   } else {
     return res.send('Not a valid URL')
   }
-  
+})
+
+app.post('/api/shorturl/new', (req, res, next) => {
+  dns.lookup(req.body.url, err => { 
+    if (err) {
+      res.json({ error: "Invalid URL" });
+    }   
+    else {
+      next();
+    }
+  });
 })
   
 // your first API endpoint... 
