@@ -45,6 +45,16 @@ app.post('/api/shorturl/new', async (req, res, next) => {
   }
   next();
 })
+
+app.post('/api/shorturl/new', async (req, res, next) => {
+  let myRegex = /^https?:\/\//m
+  if (myRegex.test(req.body.url)) {
+    next()
+  } else {
+    return res.send('Not a valid URL')
+  }
+  
+})
   
 // your first API endpoint... 
 app.get("/api/hello", function (req, res) {
